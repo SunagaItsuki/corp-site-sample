@@ -6,6 +6,9 @@
     <title>スナスナ株式会社</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body>
     <header>
@@ -13,19 +16,24 @@
             <div class="logo">
                 <a href="/">スナスナ株式会社</a>
             </div>
-            <button class="hamburger" aria-label="メニュー">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-links">
-                <li><a href="/about/philosophy.html">企業情報</a></li>
-                <li><a href="/#services">事業紹介</a></li>
-                <li><a href="/cases/">導入事例</a></li>
-                <li><a href="/#news">ニュース</a></li>
-                <li><a href="/#recruit">採用情報</a></li>
-                <li><a href="/#contact">お問い合わせ</a></li>
-            </ul>
+            <div class="nav-controls">
+                <ul class="nav-links">
+                    <li><a href="/about/philosophy.html">企業情報</a></li>
+                    <li><a href="/#services">事業紹介</a></li>
+                    <li><a href="/cases/">導入事例</a></li>
+                    <li><a href="/#news">ニュース</a></li>
+                    <li><a href="/#recruit">採用情報</a></li>
+                    <li><a href="/#contact">お問い合わせ</a></li>
+                </ul>
+                <button class="theme-toggle" aria-label="テーマ切り替え">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="hamburger" aria-label="メニュー">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </nav>
     </header>
 
@@ -224,6 +232,7 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
 </html> 
