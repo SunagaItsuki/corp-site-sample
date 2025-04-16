@@ -6,6 +6,10 @@
     <title>導入事例 - スナスナ株式会社</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <header>
@@ -13,11 +17,16 @@
             <div class="logo">
                 <a href="/">スナスナ株式会社</a>
             </div>
-            <button class="hamburger" aria-label="メニュー">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div class="nav-controls">
+                <button id="theme-toggle-btn" class="theme-toggle" aria-label="テーマ切り替え">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="hamburger" aria-label="メニュー">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
             <ul class="nav-links">
                 <li><a href="/about/philosophy.html">企業情報</a></li>
                 <li><a href="/#services">事業紹介</a></li>
