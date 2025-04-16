@@ -1589,11 +1589,11 @@ body.no-scroll {
     transform: translateY(-50%);
     font-size: 14px;
     color: #666;
-    transition: transform 0.3s;
+    transition: transform 0s;
 }
 
 .has-submenu.active .submenu-toggle {
-    transform: translateY(-50%) rotate(180deg);
+    transform: translateY(-600%) rotate(180deg);
 }
 
 /* サブメニュー */
@@ -1630,11 +1630,15 @@ body.no-scroll {
     border: none;
     font-size: 24px;
     cursor: pointer;
-    display: flex;
+    display: none; /* デフォルトでは非表示に変更 */
     justify-content: center;
     align-items: center;
     z-index: 1010; /* 他の要素より前面に表示 */
     color: #333;
+}
+
+.mobile-menu.active .menu-close {
+    display: flex; /* モバイルメニューがアクティブな時だけ表示 */
 }
 
 .menu-close:hover {
@@ -1661,4 +1665,21 @@ body.no-scroll {
     .hamburger {
         display: none;
     }
+}
+
+/* モバイルメニューの矢印位置修正 */
+.menu-item-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.menu-item-wrapper a {
+    flex-grow: 1;
+}
+
+.submenu-toggle {
+    padding: 0 10px;
+    cursor: pointer;
 } 
