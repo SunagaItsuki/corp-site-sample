@@ -50,27 +50,85 @@ stats.forEach(stat => {
 
 // ハンバーガーメニューの制御
 const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
+const mobileMenu = document.querySelector('.mobile-menu');
+const menuCloseBtn = document.querySelector('.menu-close');
 
+// ハンバーガーボタンのクリックイベント
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    document.body.classList.toggle('no-scroll'); // スクロール防止
+});
+
+// 閉じるボタンのクリックイベント
+if (menuCloseBtn) {
+    menuCloseBtn.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.classList.remove('no-scroll'); // スクロール許可
+    });
+}
+
+// サブメニューの開閉制御
+document.addEventListener('DOMContentLoaded', () => {
+    const hasSubmenuItems = document.querySelectorAll('.has-submenu');
     
-    if (hamburger.classList.contains('active')) {
-        gsap.to('.nav-links', {
-            duration: 0.5,
-            height: 'auto',
-            opacity: 1,
-            ease: "power2.out"
-        });
-    } else {
-        gsap.to('.nav-links', {
-            duration: 0.5,
-            height: 0,
-            opacity: 0,
-            ease: "power2.in"
-        });
-    }
+    hasSubmenuItems.forEach(item => {
+        const toggleBtn = item.querySelector('.submenu-toggle');
+        
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // 他のすべてのサブメニューを閉じる
+                hasSubmenuItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // クリックされた項目のサブメニューをトグル
+                item.classList.toggle('active');
+            });
+        }
+        
+        // メインメニュー項目のクリックイベント（サブメニューがある場合）
+        const mainLink = item.querySelector('a');
+        if (mainLink) {
+            mainLink.addEventListener('click', (e) => {
+                // サブメニューがある場合は、リンクの通常の動作を防止してサブメニューを開く
+                if (item.querySelector('.submenu')) {
+                    e.preventDefault();
+                    
+                    // 他のすべてのサブメニューを閉じる
+                    hasSubmenuItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // クリックされた項目のサブメニューをトグル
+                    item.classList.toggle('active');
+                }
+            });
+        }
+    });
+    
+    // 画面サイズ変更時の動作
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            // PCサイズに戻った際にモバイルメニューを閉じる
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.classList.remove('no-scroll'); // スクロール許可
+            
+            // すべてのサブメニューを閉じる
+            hasSubmenuItems.forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+    });
 });
 
 // スクロールアニメーション
