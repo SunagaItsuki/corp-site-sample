@@ -1418,12 +1418,6 @@ body.no-scroll {
     display: none;
 }
 
-:root[data-theme="dark"] .theme-toggle::before {
-    content: "\f185";
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-}
-
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
     .theme-toggle {
