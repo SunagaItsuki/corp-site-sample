@@ -143,30 +143,32 @@ window.addEventListener('scroll', () => {
 
 // フォーム送信アニメーション
 const contactForm = document.querySelector('.contact-form');
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const submitBtn = contactForm.querySelector('.submit-btn');
-    submitBtn.innerHTML = '送信中...';
-    
-    // 送信アニメーション
-    gsap.to(submitBtn, {
-        duration: 0.5,
-        scale: 0.95,
-        ease: "power2.inOut",
-        yoyo: true,
-        repeat: 1
-    });
-    
-    // ここに実際のフォーム送信処理を追加
-    setTimeout(() => {
-        submitBtn.innerHTML = '送信完了！';
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        submitBtn.innerHTML = '送信中...';
+        
+        // 送信アニメーション
         gsap.to(submitBtn, {
             duration: 0.5,
-            backgroundColor: '#4CAF50',
-            color: 'white'
+            scale: 0.95,
+            ease: "power2.inOut",
+            yoyo: true,
+            repeat: 1
         });
-    }, 1500);
-});
+        
+        // ここに実際のフォーム送信処理を追加
+        setTimeout(() => {
+            submitBtn.innerHTML = '送信完了！';
+            gsap.to(submitBtn, {
+                duration: 0.5,
+                backgroundColor: '#4CAF50',
+                color: 'white'
+            });
+        }, 1500);
+    });
+}
 
 // スムーズスクロール
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -204,54 +206,80 @@ document.querySelectorAll('.service-card, .news-item').forEach(el => {
 });
 
 // テーマ設定の管理
-const themeToggle = document.querySelector('.theme-toggle');
-const root = document.documentElement;
+// 即時実行関数でテーマ設定を管理
+(function setupThemeToggle() {
+    // ID属性でテーマ切り替えボタンを取得
+    const themeToggle = document.getElementById('theme-toggle-btn');
+    const root = document.documentElement;
 
-// ローカルストレージからテーマ設定を取得
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    root.setAttribute('data-theme', savedTheme);
-    if (savedTheme === 'dark') {
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    // テーマを適用する関数
+    function setTheme(theme) {
+        root.setAttribute('data-theme', theme);
+        
+        // アイコンの切り替え
+        if (themeToggle) {
+            themeToggle.innerHTML = theme === 'dark' 
+                ? '<i class="fas fa-sun"></i>' 
+                : '<i class="fas fa-moon"></i>';
+        }
+        
+        localStorage.setItem('theme', theme);
     }
-} else {
-    // システムのテーマ設定を確認
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        root.setAttribute('data-theme', 'dark');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
-}
 
-// テーマ切り替え機能
-themeToggle.addEventListener('click', () => {
-    const currentTheme = root.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    root.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    
-    // アイコンの切り替え
-    themeToggle.innerHTML = newTheme === 'dark' 
-        ? '<i class="fas fa-sun"></i>' 
-        : '<i class="fas fa-moon"></i>';
-    
-    // スムーズな遷移のためのアニメーション
-    document.body.style.transition = 'background-color 0.3s ease';
-    setTimeout(() => {
-        document.body.style.transition = '';
-    }, 300);
-});
-
-// システムのテーマ変更を監視
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (!localStorage.getItem('theme')) {
-        const newTheme = e.matches ? 'dark' : 'light';
-        root.setAttribute('data-theme', newTheme);
-        themeToggle.innerHTML = newTheme === 'dark'
-            ? '<i class="fas fa-sun"></i>'
-            : '<i class="fas fa-moon"></i>';
+    // ローカルストレージからテーマ設定を取得
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else {
+        // システムのテーマ設定を確認
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
     }
-});
+
+    // テーマ切り替え機能
+    function handleThemeToggle() {
+        console.log('テーマ切り替えボタンがクリックされました');
+        const currentTheme = root.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        setTheme(newTheme);
+        
+        // スムーズな遷移のためのアニメーション
+        document.body.style.transition = 'background-color 0.3s ease';
+        setTimeout(() => {
+            document.body.style.transition = '';
+        }, 300);
+    }
+
+    if (themeToggle) {
+        // インラインイベントを追加し、確実にクリックイベントが処理されるようにする
+        themeToggle.onclick = handleThemeToggle;
+        console.log('テーマ切り替えボタンのイベントを設定しました');
+    } else {
+        console.error('テーマ切り替えボタンが見つかりません');
+        // DOMの読み込みが完了していない可能性があるため、DOMContentLoadedイベントでも試みる
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('theme-toggle-btn');
+            if (btn) {
+                btn.onclick = handleThemeToggle;
+                console.log('DOMContentLoaded後にテーマ切り替えボタンのイベントを設定しました');
+            } else {
+                console.error('DOMContentLoaded後もテーマ切り替えボタンが見つかりません');
+            }
+        });
+    }
+
+    // システムのテーマ変更を監視
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.getItem('theme')) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            setTheme(newTheme);
+        }
+    });
+})();
 
 // お問い合わせメール機能
 document.addEventListener('DOMContentLoaded', () => {
@@ -265,6 +293,34 @@ document.addEventListener('DOMContentLoaded', () => {
             
             window.location.href = mailtoData;
         });
+    }
+
+    // フォールバックとして、ここでもテーマ切り替えボタンのイベントを設定する
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    if (themeToggleBtn && !themeToggleBtn.onclick) {
+        themeToggleBtn.onclick = function() {
+            console.log('DOMContentLoadedイベントからテーマを切り替えます');
+            const root = document.documentElement;
+            const currentTheme = root.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            // テーマを適用
+            root.setAttribute('data-theme', newTheme);
+            
+            // アイコンの切り替え
+            this.innerHTML = newTheme === 'dark' 
+                ? '<i class="fas fa-sun"></i>' 
+                : '<i class="fas fa-moon"></i>';
+            
+            localStorage.setItem('theme', newTheme);
+            
+            // スムーズな遷移のためのアニメーション
+            document.body.style.transition = 'background-color 0.3s ease';
+            setTimeout(() => {
+                document.body.style.transition = '';
+            }, 300);
+        };
+        console.log('バックアップのテーマ切り替えイベントを設定しました');
     }
 });
 
