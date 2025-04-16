@@ -171,21 +171,19 @@
                         <p><i class="fas fa-map-marker-alt"></i> 東京都港区六本木1-1-1</p>
                     </div>
                 </div>
-                <form class="contact-form">
+                <div class="contact-form">
                     <div class="form-group">
-                        <label for="name">お名前</label>
-                        <input type="text" id="name" name="name" required>
+                        <label for="inquiry-type">お問い合わせ項目</label>
+                        <select id="inquiry-type" name="inquiry-type">
+                            <option value="general">一般的なお問い合わせ</option>
+                            <option value="service">サービスに関するお問い合わせ</option>
+                            <option value="support">サポートに関するお問い合わせ</option>
+                            <option value="business">業務提携のご相談</option>
+                            <option value="recruitment">採用に関するお問い合わせ</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="email">メールアドレス</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">お問い合わせ内容</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">送信する</button>
-                </form>
+                    <button id="contact-button" class="submit-btn">メールでお問い合わせ</button>
+                </div>
             </div>
         </section>
     </main>

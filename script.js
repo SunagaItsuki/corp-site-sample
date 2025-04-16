@@ -193,4 +193,58 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e =
             ? '<i class="fas fa-sun"></i>'
             : '<i class="fas fa-moon"></i>';
     }
-}); 
+});
+
+// お問い合わせメール機能
+document.addEventListener('DOMContentLoaded', () => {
+    const contactButton = document.getElementById('contact-button');
+    const inquiryTypeSelect = document.getElementById('inquiry-type');
+    
+    if (contactButton && inquiryTypeSelect) {
+        contactButton.addEventListener('click', () => {
+            const selectedType = inquiryTypeSelect.value;
+            const mailtoData = generateMailtoData(selectedType);
+            
+            window.location.href = mailtoData;
+        });
+    }
+});
+
+// 選択したお問い合わせ項目に応じてメールテンプレートを生成
+function generateMailtoData(inquiryType) {
+    const email = 'info@sunasuna.co.jp';
+    let subject = '';
+    let body = '';
+    
+    switch (inquiryType) {
+        case 'general':
+            subject = '【一般的なお問い合わせ】';
+            body = `スナスナ株式会社 ご担当者様\n\n一般的なお問い合わせをいたします。\n\n`;
+            break;
+        case 'service':
+            subject = '【サービスに関するお問い合わせ】';
+            body = `スナスナ株式会社 ご担当者様\n\n御社のサービスについて、以下の点についてお問い合わせいたします。\n\n`;
+            break;
+        case 'support':
+            subject = '【サポートに関するお問い合わせ】';
+            body = `スナスナ株式会社 ご担当者様\n\n現在利用中のサービスについて、サポートをお願いいたします。\n\n`;
+            break;
+        case 'business':
+            subject = '【業務提携のご相談】';
+            body = `スナスナ株式会社 ご担当者様\n\n業務提携について相談させていただきたく、ご連絡いたしました。\n\n`;
+            break;
+        case 'recruitment':
+            subject = '【採用に関するお問い合わせ】';
+            body = `スナスナ株式会社 採用ご担当者様\n\n採用について、以下のお問い合わせをいたします。\n\n`;
+            break;
+        default:
+            subject = '【お問い合わせ】';
+            body = `スナスナ株式会社 ご担当者様\n\nお問い合わせいたします。\n\n`;
+    }
+    
+    body += `お名前：\nメールアドレス：\n電話番号：\n\n内容：\n\n`;
+    body += `以上、よろしくお願いいたします。`;
+    
+    // URLエンコードしてmailtoリンクを作成
+    return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+} 
