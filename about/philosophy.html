@@ -6,6 +6,9 @@
     <title>企業理念 - スナスナ株式会社</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body>
     <header>
@@ -13,19 +16,24 @@
             <div class="logo">
                 <a href="/">スナスナ株式会社</a>
             </div>
-            <button class="hamburger" aria-label="メニュー">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-links">
-                <li><a href="/about/philosophy.html">企業情報</a></li>
-                <li><a href="/#services">事業紹介</a></li>
-                <li><a href="/#cases">導入事例</a></li>
-                <li><a href="/#news">ニュース</a></li>
-                <li><a href="/#recruit">採用情報</a></li>
-                <li><a href="/#contact">お問い合わせ</a></li>
-            </ul>
+            <div class="nav-controls">
+                <ul class="nav-links">
+                    <li><a href="/about/philosophy.html">企業情報</a></li>
+                    <li><a href="/#services">事業紹介</a></li>
+                    <li><a href="/cases/">導入事例</a></li>
+                    <li><a href="/#news">ニュース</a></li>
+                    <li><a href="/#recruit">採用情報</a></li>
+                    <li><a href="/#contact">お問い合わせ</a></li>
+                </ul>
+                <button class="theme-toggle" aria-label="テーマ切り替え">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="hamburger" aria-label="メニュー">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </nav>
     </header>
 
@@ -38,7 +46,7 @@
         </section>
 
         <section class="philosophy-content">
-            <div class="philosophy-main">
+            <div class="philosophy-main" data-aos="fade-up">
                 <h2>Vision</h2>
                 <p class="vision-text">テクノロジーの力で、人々の暮らしを豊かにする</p>
                 
@@ -47,22 +55,22 @@
                 
                 <h2>Value</h2>
                 <div class="value-items">
-                    <div class="value-item">
+                    <div class="value-item" data-aos="fade-up" data-aos-delay="100">
                         <h3>Innovation</h3>
                         <p>常に新しいことに挑戦し、革新的なソリューションを生み出す</p>
                     </div>
-                    <div class="value-item">
+                    <div class="value-item" data-aos="fade-up" data-aos-delay="200">
                         <h3>Collaboration</h3>
                         <p>お客様との協働を通じて、共に成長を目指す</p>
                     </div>
-                    <div class="value-item">
+                    <div class="value-item" data-aos="fade-up" data-aos-delay="300">
                         <h3>Excellence</h3>
                         <p>最高品質のサービスを提供することを追求する</p>
                     </div>
                 </div>
             </div>
 
-            <div class="philosophy-message">
+            <div class="philosophy-message" data-aos="fade-up" data-aos-delay="100">
                 <h2>メッセージ</h2>
                 <div class="message-content">
                     <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&h=600&q=80" alt="代表取締役の写真">
@@ -92,24 +100,24 @@
                 <div class="footer-section">
                     <h4>事業紹介</h4>
                     <ul>
-                        <li><a href="/#transform">デジタル変革支援</a></li>
-                        <li><a href="/#create">システム開発</a></li>
-                        <li><a href="/#design">UXデザイン</a></li>
+                        <li><a href="/#services">デジタル変革支援</a></li>
+                        <li><a href="/#services">システム開発</a></li>
+                        <li><a href="/#services">UXデザイン</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>採用情報</h4>
                     <ul>
-                        <li><a href="/#recruit">募集職種</a></li>
-                        <li><a href="/#culture">企業文化</a></li>
-                        <li><a href="/#benefits">福利厚生</a></li>
+                        <li><a href="/recruit/">募集職種</a></li>
+                        <li><a href="/recruit/culture.html">企業文化</a></li>
+                        <li><a href="/recruit/benefits.html">福利厚生</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>お問い合わせ</h4>
                     <ul>
                         <li><a href="/#contact">お問い合わせフォーム</a></li>
-                        <li><a href="/#access">アクセス</a></li>
+                        <li><a href="/about/access.html">アクセス</a></li>
                     </ul>
                 </div>
             </div>
@@ -119,6 +127,7 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="../script.js"></script>
 </body>
 </html> 
