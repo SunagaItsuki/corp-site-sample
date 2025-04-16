@@ -712,28 +712,36 @@ body.no-scroll {
 
 /* Philosophy page styles */
 .page-header {
-    background: var(--section-background);
-    padding: 8rem 1rem 4rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&h=900&q=80') no-repeat center center;
+    background-size: cover;
+    padding: 10rem 1rem 6rem;
     text-align: center;
+    color: white;
+    position: relative;
 }
 
 .page-header h1 {
     font-size: 2.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
 }
 
 .breadcrumb {
-    color: #666;
+    color: #f5f5f5;
     font-size: 0.9rem;
+    position: relative;
+    z-index: 1;
 }
 
 .breadcrumb a {
-    color: #0066cc;
+    color: #ffffff;
     text-decoration: none;
 }
 
 .breadcrumb a:hover {
     text-decoration: underline;
+    color: #e0e0e0;
 }
 
 .philosophy-content {
